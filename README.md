@@ -4,8 +4,8 @@ Alphabet guessing game web-application(MongoDB) for Database Systems for Softwar
 ## How to play
 Open the terminal and do this command
 ```bash
-git clone 
-cd 
+git clone https://github.com/PanidaOun/guessing-game.git
+cd guessing-game
 docker-compose up -d
 docker-compose logs -f --tail 10 web
 ```
