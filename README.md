@@ -12,4 +12,6 @@ docker-compose logs -f --tail 10 web
 ```
 then go to this website => http://localhost and enjoy the game
 
+![Imgur](https://i.imgur.com/FsEJLGV.png)
+
 ### BY Panida Ounnaitham 6210545513
