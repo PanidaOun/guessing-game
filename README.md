@@ -2,7 +2,7 @@
 Alphabet guessing game web-application(MongoDB) for Database Systems for Software and Knowledge Engineers
 
 ## How to play
-Open the terminal and do this command
+Open the terminal and following this command
 ```bash
 cd directory name
 git clone https://github.com/PanidaOun/guessing-game.git
