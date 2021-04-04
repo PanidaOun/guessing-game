@@ -39,7 +39,6 @@ def index():
         return gamepage()
     return body
 
-
 @application.route('/choiceA')
 def choiceA():
     return choice1('A')
@@ -95,13 +94,29 @@ def choice2(chars):
         db_game.update_one({},  {"$set": {"fail": fail+1}})
     return gamepage()
 
-
 @application.route('/gamepage')
 def gamepage():
     db_game = db.game
     game = db_game.find_one()
     if game['question'] == game['answer']:
-        return win()
+        db_game = db.game
+        game = db_game.find_one()
+        body = '<h2 style="color:white;background-color:tomato; font-size:50px;" >Alphabet Guessing Game V.1.0</h2>'
+        body += '<b >You Win !!!</b>'
+        body += '<br> <br> '
+        body += '<b>Fails: </b>' + str(game['fail']) + '<b> time(s)</b>'
+        body += '<br> <br> '
+        db_game = db.game
+        database = {
+            "question": ["_", "_", "_", "_"],
+            "guessing": ["*", "*", "*", "*"],
+            "answer": [],
+            "fail": 0,
+            "step": 0
+        }
+        db_game.update_one({},  {"$set": database})
+        body += '<button> <a href="/">Retry!</a></button>'
+        return body
     answer = ' '.join(game['answer'])
     guess = ' '.join(game['guessing'])
     body = '<h2 style="color:blue; background-color:tomato; font-size:50px;">Alphabet Guessing Game V.1.0</h2>'
@@ -115,28 +130,6 @@ def gamepage():
     body += '<br> <br>'
     body += 'Fails: ' + str(game["fail"])
     return body
-
-@application.route('/win')
-def win():
-    db_game = db.game
-    game = db_game.find_one()
-    body = '<h2 style="color:white;background-color:tomato; font-size:50px;" >Alphabet Guessing Game V.1.0</h2>'
-    body += '<b >You Win !!!</b>'
-    body += '<br> <br> '
-    body += '<b>Fails: </b>' + str(game['fail']) + '<b> time(s)</b>'
-    body += '<br> <br> '
-    db_game = db.game
-    database = {
-        "question": ["_", "_", "_", "_"],
-        "guessing": ["*", "*", "*", "*"],
-        "answer": [],
-        "fail": 0,
-        "step": 0
-    }
-    db_game.update_one({},  {"$set": database})
-    body += '<button> <a href="/">Retry!</a></button>'
-    return body
-
 
 @application.route('/sample')
 def sample():
